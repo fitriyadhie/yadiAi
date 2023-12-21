@@ -1,5 +1,3 @@
-from flask import Flask
-
 import google.generativeai as genai
 
 genai.configure(api_key="AIzaSyBBR0qn28t8KtMFUZ5j_Dwj5MAl1BH4wfw")
@@ -44,13 +42,5 @@ prompt_parts = [
   "output: ",
 ]
 
-# response = model.generate_content(prompt_parts)
-# print(response.text)
-
-
-app = Flask(__name__)
-
-@app.route("/AI/<ask>")
-def hello(ask):
-    response = model.generate_content(prompt_parts)
-    return f"Hello, {response.text}!"
+response = model.generate_content(prompt_parts)
+print(response.text)
