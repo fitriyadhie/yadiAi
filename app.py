@@ -53,14 +53,20 @@ app = Flask(__name__)
 @app.route("/AI/<ask>")
 def appAsk(ask):
 
-    prompt_parts = list(prompt_greeting)
-    input = {"text": "input: " + ask}
-    output = {"text": "output :"}
-    prompt_parts.append(input)
-    prompt_parts.append(output)
+    keyword = ask[0:5]
+    if "bubuy" in keyword:
+        print(ask[5:])
+        
+        prompt_parts = list(prompt_greeting)
+        input = {"text": "input: " + ask[5:]}
+        output = {"text": "output :"}
+        prompt_parts.append(input)
+        prompt_parts.append(output)
 
-    response = model.generate_content(prompt_parts)
-    return f"{response.text}"
+        response = model.generate_content(prompt_parts)
+        return f"{response.text}"
+    else:
+        return f""
 
 @app.route("/AI/IQRO/<ask>")
 def appLearn(ask):
