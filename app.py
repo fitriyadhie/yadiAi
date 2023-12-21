@@ -55,8 +55,7 @@ def appAsk(ask):
 
     keyword = ask[0:5]
     if "bubuy" in keyword:
-        print(ask[5:])
-        
+                
         prompt_parts = list(prompt_greeting)
         input = {"text": "input: " + ask[5:]}
         output = {"text": "output :"}
@@ -66,8 +65,7 @@ def appAsk(ask):
         response = model.generate_content(prompt_parts)
         return f"{response.text}"
     else:
-        # result = {'salah katakunci'}
-        return Response(json.dumps({'Error': 'Error in payload'}), status=422, mimetype="application/json")
+        return f""
 
 @app.route("/AI/IQRO/<ask>")
 def appLearn(ask):
