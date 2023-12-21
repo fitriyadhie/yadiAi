@@ -66,7 +66,8 @@ def appAsk(ask):
         response = model.generate_content(prompt_parts)
         return f"{response.text}"
     else:
-        return f""
+        # result = {'salah katakunci'}
+        return Response(json.dumps({'Error': 'Error in payload'}), status=422, mimetype="application/json")
 
 @app.route("/AI/IQRO/<ask>")
 def appLearn(ask):
