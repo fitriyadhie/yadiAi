@@ -35,13 +35,13 @@ model = genai.GenerativeModel(model_name="gemini-pro",
                               generation_config=generation_config,
                               safety_settings=safety_settings)
 
-prompt_parts = [
+prompt_greeting = [
   "input: nama kamu adalah",
   "output: bubuy",
-  "input: kamu punya anak",
+  "input: Bos kamu adalah",
+  "output: Fitriyadi",
+  "input: fitriyadi punya anak",
   "output: keenan dan yumna",
-  "input: nama kamu",
-  "output: ",
 ]
 
 # response = model.generate_content(prompt_parts)
@@ -51,6 +51,28 @@ prompt_parts = [
 app = Flask(__name__)
 
 @app.route("/AI/<ask>")
-def hello(ask):
+def appAsk(ask):
+
+    prompt_parts = list(prompt_greeting)
+    input = {"text": "input: " + ask}
+    output = {"text": "output :"}
+    prompt_parts.append(input)
+    prompt_parts.append(output)
+
     response = model.generate_content(prompt_parts)
-    return f"Hello, {response.text}!"
+    return f"{response.text}"
+
+@app.route("/AI/IQRO/<ask>")
+def appLearn(ask):
+
+    keywords = "IQRO"
+    keyword = ask.split(":")
+
+    if keyword[0] == keywords:
+        print("belajar ap gan")
+        input = {"text": "input: " + keyword[1]}
+        output = {"text": "output: " + keyword[2]}
+        prompt_greeting.append(input)
+        prompt_greeting.append(output)
+
+    return f"{prompt_greeting}"
