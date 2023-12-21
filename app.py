@@ -54,8 +54,8 @@ app = Flask(__name__)
 def appAsk(ask):
 
     keyword = ask[0:5]
-    if "bubuy" in keyword:
-                
+    if "bubuy" in keyword.lower():
+
         prompt_parts = list(prompt_greeting)
         input = {"text": "input: " + ask[5:]}
         output = {"text": "output :"}
